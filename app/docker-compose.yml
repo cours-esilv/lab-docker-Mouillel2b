@@ -1,0 +1,17 @@
+version: '3'
+services:
+  my-service:
+    image: mouillel2b/lab_docker:latest
+    ports:
+      - "5000:5000"  # Maps port 5000 of the container to port 5000 of the host
+    environment:
+      - CURRENT_ENVIRONMENT=production
+    volumes:
+      - ./data:/path/to/data/in/container  # Mounts the local ./data directory to /path/to/data/in/container in the container
+
+  my-front-service:
+    image: my-front-end-image
+    ports:
+      - "8082:80"  # Maps port 80 of the container to port 8082 of the host
+    environment:
+      - WS_BACK_URL=http://my-back-service:5000
